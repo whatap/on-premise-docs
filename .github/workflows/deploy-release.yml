@@ -8,19 +8,24 @@ on:
         default: "WhaTap"
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [15]
     steps:
-      - uses: actions/checkout@v3
-        with: 
+    - uses: actions/checkout@v3
+      with: 
           submodules: true
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Build website
-        run: pnpm build
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+    - name: Build website
+      run: pnpm build
