@@ -29,3 +29,10 @@ jobs:
       run: pnpm install --frozen-lockfile
     - name: Build website
       run: pnpm build
+    - name: zip build
+      run: zip -r ./build/whatap-docs.zip ./build/*
+    - name: upload release
+      uses: actions/upload-artifact@v3
+      with:
+        name: whatap-docs
+        path: ./build
