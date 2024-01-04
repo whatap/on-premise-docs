@@ -19,76 +19,25 @@ module.exports = Promise.resolve({
   favicon: '/img/whatap-favicon.ico',
   i18n: {
     defaultLocale: 'ko',
-    locales: [ 'ko', 'en', 'ja' ],
-    localeConfigs: {
-      ko: {
-        label: 'KOR',
-        direction: 'ltr',
-        htmlLang: 'ko-KR',
-      },
-      en: {
-        label: 'ENG',
-        direction: 'ltr',
-        htmlLang: 'en-US',
-        calendar: 'gregory',
-        path: 'en',
-      },
-      ja: {
-        label: 'JPN',
-        direction: 'ltr',
-        htmlLang: 'ja-JP',
-        path: 'ja',
-      },
-    }
+    locales: [ 'ko' ],
   },
-  // trailingSlash: false,
-  // clientModules: [
-  //   require.resolve('./static/js/rum.js')
-  // ],
-  scripts: [
-    // {
-    //   src: 'https://app.happyreact.com/widget/reactions.js',
-    //   async: true,
-    // },
-  ],
   plugins: [
-    [ './src/whatap-plugin-facebook', {}],
-    [ './src/whatap-plugin-browser', {}],
-    [ 'docusaurus-plugin-sass', {} ],
-    [ 'docusaurus-plugin-pagemove', {} ],
-    [
-      '@docusaurus/plugin-client-redirects',
+    [ 
+      require.resolve("@easyops-cn/docusaurus-search-local"),
       {
-        // fromExtensions: ['html', 'htm'],
-        redirects: [
-          {
-            to: '/java/introduction',
-            from: '/apm/java/apm-introduction'
-          },
-          {
-            to: '/java/introduction',
-            from: '/apm/java-intro'
-          },
-          {
-            to: '/server/introduction',
-            from: '/server/server-intro'
-          },
-        ],
+        hashed: true,
+        language: [ 'ko' ],
+        indexBlog: false,
+        docsRouteBasePath: '/',
+        removeDefaultStemmer: false,
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        searchResultContextMaxLength: 50,
+        ignoreFiles: [/items/],
       }
     ],
-    [
-      '@docusaurus/plugin-google-gtag',
-      {
-        trackingID: 'G-E46TQ5VSCT',
-        anonymizeIP: true,
-      },
-    ],
-    [
-      '@docusaurus/plugin-google-tag-manager',
-      {
-        containerId: 'GTM-WJSZDJR',
-      },
-    ],
+    [ 'docusaurus-plugin-sass', {} ],
+    [ 'docusaurus-plugin-pagemove', {} ],
     [
       '@whatap-docs/docusaurus-plugin-includes',
       {
@@ -167,13 +116,6 @@ module.exports = Promise.resolve({
       mermaid: {
         theme: {light: 'neutral', dark: 'forest'},
       },
-      // announcementBar: {
-      //   id: 'moniday-banner',
-      //   content: '<div id="moniday-banner">🎙️ 10월 19일, IT 현대화에 적합한 모니터링 플랫폼이 궁금하다면? <span id="bar"></span> <a class="btn-white-file" href="https://www.whatap.io/ko/moniDay" target="_blank">WhaTap Moni Day 신청하기</a></div>',
-      //   backgroundColor: 'none',
-      //   textColor: '#ffffff',
-      //   isCloseable: true,
-      // },
       metadata: [
         {
           name: 'keywords',
@@ -608,11 +550,6 @@ module.exports = Promise.resolve({
             docId: 'release-notes',
             position: 'left',
             label: '릴리스 노트',
-          },
-          {
-            type: 'localeDropdown',
-            className: 'oneColumn localeDropdown',
-            position: 'right',
           },
           {
             type: 'search',
